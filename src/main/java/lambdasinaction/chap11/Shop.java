@@ -21,6 +21,11 @@ public class Shop {
         return name + ":" + price + ":" + code;
     }
 
+    /**
+     * 计算价格
+     * @param product
+     * @return
+     */
     public double calculatePrice(String product) {
         delay();
         return format(random.nextDouble() * product.charAt(0) + product.charAt(1));

@@ -25,6 +25,10 @@ public class BestPriceFinder {
                                                    new Shop("BuyItAll")/*,
                                                    new Shop("ShopEasy")*/);
 
+
+    /**
+     * 定义线程池
+     */
     private final Executor executor = Executors.newFixedThreadPool(shops.size(), new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
@@ -33,6 +37,7 @@ public class BestPriceFinder {
             return t;
         }
     });
+
 
     public List<String> findPricesSequential(String product) {
         return shops.stream()
@@ -59,6 +64,8 @@ public class BestPriceFinder {
         return prices;
     }
 
+
+
     public List<String> findPricesInUSD(String product) {
         List<CompletableFuture<Double>> priceFutures = new ArrayList<>();
         for (Shop shop : shops) {
@@ -84,6 +91,8 @@ public class BestPriceFinder {
                 .collect(Collectors.toList());
         return prices;
     }
+
+
 
     public List<String> findPricesInUSDJava7(String product) {
         ExecutorService executor = Executors.newCachedThreadPool();
